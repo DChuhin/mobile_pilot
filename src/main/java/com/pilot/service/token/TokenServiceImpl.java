@@ -7,6 +7,7 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +30,7 @@ public class TokenServiceImpl implements TokenService {
         if (username == null || password == null)
             return null;
         User user = userDao.getUserByUserName(username);
-        if (user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(password)) {
             Map<String, Object> tokenData = new HashMap<>();
             tokenData.put("userId", user.getId());
             tokenData.put("userName", user.getName());
@@ -42,7 +43,7 @@ public class TokenServiceImpl implements TokenService {
             jwtBuilder.setClaims(tokenData);
             return jwtBuilder.signWith(SignatureAlgorithm.HS256, SecurityConstant.KEY).compact();
         } else {
-            throw new RuntimeException("Authentication error");
+            throw new AuthenticationCredentialsNotFoundException("Authentication error");
         }
     }
 }
