@@ -1,0 +1,40 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="init_schema_1" author="daniil.chukhin@oxagile.com">
+        <createTable tableName="T_ADVERTISE_LOG">
+            <column name="F_ID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="F_ADVERTISE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="F_CHANNEL_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="F_DEVICE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="F_DATE" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="init_schema_2" author="daniil.chukhin@oxagile.com">
+        <createTable tableName="T_USER">
+            <column name="F_ID" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="F_NAME" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="F_PASSWORD" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
