@@ -30,8 +30,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("FieldLink API")
-                .description("FieldLink REST API description for testing purposes")
+                .title("Mobile Pilot API")
+                .description("Mobile Pilot API description")
                 .termsOfServiceUrl("http://springfox.io")
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://github.com/springfox/springfox/blob/master/LICENSE")
