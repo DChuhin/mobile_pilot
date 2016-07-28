@@ -5,7 +5,7 @@ public class ChartEntry {
 
     private String label;
 
-    private long count = 0;
+    private Long count = 0L;
 
     public String getLabel() {
         return label;

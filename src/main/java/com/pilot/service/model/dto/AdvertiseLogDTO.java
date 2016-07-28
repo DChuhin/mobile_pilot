@@ -8,15 +8,15 @@ import com.pilot.repository.model.entity.AdvertiseLog;
  */
 public class AdvertiseLogDTO {
 
-    private long logId;
+    private Long logId;
 
-    private long advertiseId;
+    private Long advertiseId;
 
-    private long channelId;
+    private Long channelId;
 
-    private long date;
+    private Long date;
 
-    private long deviceId;
+    private Long deviceId;
 
     private AdvertiseLogDTO(Builder builder) {
         logId = builder.logId;
@@ -30,58 +30,58 @@ public class AdvertiseLogDTO {
         return new Builder();
     }
 
-    public long getLogId() {
+    public Long getLogId() {
         return logId;
     }
 
-    public long getAdvertiseId() {
+    public Long getAdvertiseId() {
         return advertiseId;
     }
 
-    public long getChannelId() {
+    public Long getChannelId() {
         return channelId;
     }
 
-    public long getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public long getDeviceId() {
+    public Long getDeviceId() {
         return deviceId;
     }
 
 
     public static final class Builder {
-        private long logId;
-        private long advertiseId;
-        private long channelId;
-        private long date;
-        private long deviceId;
+        private Long logId;
+        private Long advertiseId;
+        private Long channelId;
+        private Long date;
+        private Long deviceId;
 
         private Builder() {
         }
 
-        public Builder withLogId(long val) {
+        public Builder withLogId(Long val) {
             logId = val;
             return this;
         }
 
-        public Builder withAdvertiseId(long val) {
+        public Builder withAdvertiseId(Long val) {
             advertiseId = val;
             return this;
         }
 
-        public Builder withChannelId(long val) {
+        public Builder withChannelId(Long val) {
             channelId = val;
             return this;
         }
 
-        public Builder withDate(long val) {
+        public Builder withDate(Long val) {
             date = val;
             return this;
         }
 
-        public Builder withDeviceId(long val) {
+        public Builder withDeviceId(Long val) {
             deviceId = val;
             return this;
         }
