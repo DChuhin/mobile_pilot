@@ -1,4 +1,4 @@
-package com.pilot.configuration.security;
+package com.pilot.service.model;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;

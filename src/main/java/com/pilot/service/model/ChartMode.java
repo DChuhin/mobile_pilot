@@ -1,4 +1,4 @@
-package com.pilot.model;
+package com.pilot.service.model;
 
 /**
  * Chart modes enum

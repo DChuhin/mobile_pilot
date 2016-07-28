@@ -1,12 +1,11 @@
 package com.pilot;
 
+import com.pilot.configuration.MobilePilotConfig;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
 public class MobilePilotApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MobilePilotApplication.class, args);
+        SpringApplication.run(MobilePilotConfig.class, args);
     }
 }

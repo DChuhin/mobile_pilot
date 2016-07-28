@@ -1,4 +1,4 @@
-package com.pilot.model;
+package com.pilot.controller.model.request;
 
 import io.swagger.annotations.ApiModel;
 

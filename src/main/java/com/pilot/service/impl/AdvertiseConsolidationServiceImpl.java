@@ -1,9 +1,9 @@
 package com.pilot.service.impl;
 
-import com.pilot.model.ChartContext;
-import com.pilot.model.ChartEntry;
-import com.pilot.model.ChartMode;
 import com.pilot.service.AdvertiseConsolidationService;
+import com.pilot.service.model.ChartEntry;
+import com.pilot.service.model.ChartMode;
+import com.pilot.service.model.ChartContext;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;

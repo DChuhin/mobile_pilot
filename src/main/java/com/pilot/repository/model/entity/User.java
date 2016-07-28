@@ -1,4 +1,4 @@
-package com.pilot.model.entity;
+package com.pilot.repository.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

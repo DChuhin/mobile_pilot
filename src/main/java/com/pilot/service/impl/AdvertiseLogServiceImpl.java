@@ -1,14 +1,13 @@
 package com.pilot.service.impl;
 
-import com.pilot.model.ChartContext;
-import com.pilot.model.ChartEntry;
-import com.pilot.model.dto.AdvertiseLogDTO;
-import com.pilot.model.dto.builder.AdvertiseLogDTOBuilder;
-import com.pilot.model.entity.AdvertiseLog;
-import com.pilot.model.request.AdvertiseRequest;
+import com.pilot.controller.model.request.AdvertiseRequest;
 import com.pilot.repository.AdvertiseLogDao;
+import com.pilot.repository.model.entity.AdvertiseLog;
 import com.pilot.service.AdvertiseConsolidationService;
 import com.pilot.service.AdvertiseLogService;
+import com.pilot.service.model.ChartContext;
+import com.pilot.service.model.ChartEntry;
+import com.pilot.service.model.dto.AdvertiseLogDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,11 +22,15 @@ import java.util.stream.Collectors;
 @Service
 public class AdvertiseLogServiceImpl implements AdvertiseLogService {
 
-    @Autowired
-    private AdvertiseConsolidationService advertiseConsolidationService;
+    private final AdvertiseConsolidationService advertiseConsolidationService;
+
+    private final AdvertiseLogDao advertiseLogDao;
 
     @Autowired
-    private AdvertiseLogDao advertiseLogDao;
+    public AdvertiseLogServiceImpl(AdvertiseLogDao advertiseLogDao, AdvertiseConsolidationService advertiseConsolidationService) {
+        this.advertiseLogDao = advertiseLogDao;
+        this.advertiseConsolidationService = advertiseConsolidationService;
+    }
 
     @Override
     @Transactional
@@ -37,7 +40,7 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
         advertiseLog.setChannelId(advertiseLogDTO.getChannelId());
         advertiseLog.setDate(new Date().getTime());
         advertiseLogDao.saveOrUpdate(advertiseLog);
-        return new AdvertiseLogDTOBuilder().build(advertiseLog);
+        return AdvertiseLogDTO.newBuilder().build(advertiseLog);
     }
 
     @Override
@@ -72,7 +75,7 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
     public List<AdvertiseLogDTO> getLogs(AdvertiseRequest advertiseRequest) {
         List<AdvertiseLog> advertises = advertiseLogDao.getChartListByRequest(advertiseRequest);
         return advertises.stream()
-                .map(advertiseLog -> new AdvertiseLogDTOBuilder().build(advertiseLog))
+                .map(advertiseLog -> AdvertiseLogDTO.newBuilder().build(advertiseLog))
                 .collect(Collectors.toList());
     }
 

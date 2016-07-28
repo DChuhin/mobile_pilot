@@ -1,7 +1,7 @@
 package com.pilot.repository.impl;
 
-import com.pilot.model.entity.AdvertiseLog;
-import com.pilot.model.request.AdvertiseRequest;
+import com.pilot.repository.model.entity.AdvertiseLog;
+import com.pilot.controller.model.request.AdvertiseRequest;
 import com.pilot.repository.AdvertiseLogDao;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -17,8 +17,12 @@ import java.util.List;
 @Repository
 public class AdvertiseLogDaoImpl implements AdvertiseLogDao {
 
+    private final SessionFactory sessionFactory;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    public AdvertiseLogDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void saveOrUpdate(AdvertiseLog advertiseLog) {

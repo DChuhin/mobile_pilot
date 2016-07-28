@@ -1,6 +1,6 @@
-package com.pilot.configuration.security;
+package com.pilot.service;
 
-import com.pilot.model.entity.User;
+import com.pilot.repository.model.entity.User;
 import com.pilot.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +17,12 @@ import java.util.ArrayList;
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
 
+    private final UserDao userDao;
+
     @Autowired
-    private UserDao userDao;
+    public CustomUserDetailsService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     @Transactional

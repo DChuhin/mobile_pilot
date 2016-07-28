@@ -1,4 +1,4 @@
-package com.pilot.configuration;
+package com.pilot.configuration.jdbc;
 
 import liquibase.integration.spring.SpringLiquibase;
 import org.apache.commons.dbcp.BasicDataSource;

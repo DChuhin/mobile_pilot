@@ -1,4 +1,4 @@
-package com.pilot.configuration;
+package com.pilot.configuration.jdbc;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
@@ -30,7 +30,7 @@ public class HibernateConfig {
     @Bean(name = "sessionFactory")
     public SessionFactory sessionFactory() {
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-        builder.scanPackages("com.pilot.model.entity").addProperties(getHibernateProperties());
+        builder.scanPackages("com.pilot.repository.model.entity").addProperties(getHibernateProperties());
         return builder.buildSessionFactory();
     }
 

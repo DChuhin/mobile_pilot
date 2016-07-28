@@ -1,4 +1,4 @@
-package com.pilot.model.entity;
+package com.pilot.repository.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Advertise log entity
@@ -14,6 +15,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "T_ADVERTISE_LOG")
 public class AdvertiseLog implements Serializable {
+
+    private static final long serialVersionUID = -1541824379811798517L;
 
     @Id
     @Column(name = "F_ID")
@@ -70,5 +73,22 @@ public class AdvertiseLog implements Serializable {
 
     public void setChannelId(long channelId) {
         this.channelId = channelId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AdvertiseLog)) return false;
+        AdvertiseLog that = (AdvertiseLog) o;
+        return id == that.id &&
+                advertiseId == that.advertiseId &&
+                channelId == that.channelId &&
+                date == that.date &&
+                deviceId == that.deviceId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, advertiseId, channelId, date, deviceId);
     }
 }

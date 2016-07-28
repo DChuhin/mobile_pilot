@@ -1,6 +1,6 @@
 package com.pilot.controller.exceptionHandler;
 
-import com.pilot.model.Response;
+import com.pilot.controller.model.request.Response;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice(basePackages = "com.pilot.controller")
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-public class AuthenticationExceptionHandler {
+class AuthenticationExceptionHandler {
 
     private static final Logger LOGGER = Logger.getLogger(AuthenticationExceptionHandler.class);
 

@@ -1,6 +1,6 @@
 package com.pilot.repository.impl;
 
-import com.pilot.model.entity.User;
+import com.pilot.repository.model.entity.User;
 import com.pilot.repository.UserDao;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;

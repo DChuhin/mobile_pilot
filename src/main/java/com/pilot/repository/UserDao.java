@@ -1,6 +1,6 @@
 package com.pilot.repository;
 
-import com.pilot.model.entity.User;
+import com.pilot.repository.model.entity.User;
 
 /**
  * User dao

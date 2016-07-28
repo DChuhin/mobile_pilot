@@ -1,4 +1,4 @@
-package com.pilot.configuration.security;
+package com.pilot.service.model;
 
 /**
  * Security constant

@@ -1,8 +1,8 @@
 package com.pilot.service;
 
-import com.pilot.model.ChartEntry;
-import com.pilot.model.dto.AdvertiseLogDTO;
-import com.pilot.model.request.AdvertiseRequest;
+import com.pilot.service.model.ChartEntry;
+import com.pilot.service.model.dto.AdvertiseLogDTO;
+import com.pilot.controller.model.request.AdvertiseRequest;
 
 import java.util.List;
 

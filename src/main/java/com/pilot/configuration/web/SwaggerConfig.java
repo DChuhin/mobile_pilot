@@ -1,4 +1,4 @@
-package com.pilot.configuration;
+package com.pilot.configuration.web;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,7 @@
 package com.pilot.configuration.security;
 
+import com.pilot.service.model.SecurityConstant;
+import com.pilot.service.model.TokenAuthentication;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -18,14 +20,14 @@ import java.text.MessageFormat;
 /**
  * TokenAuthenticationFilter
  */
-public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     private static final String FILTER_URL = "/api/**";
 
     /**
      * Default constructor
      */
-    public TokenAuthenticationFilter() {
+    TokenAuthenticationFilter() {
         super(FILTER_URL);
         setAuthenticationSuccessHandler((request, response, authentication) ->
                 SecurityContextHolder.getContext().setAuthentication(authentication));

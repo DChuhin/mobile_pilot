@@ -1,5 +1,7 @@
 package com.pilot.configuration.security;
 
+import com.pilot.service.model.SecurityConstant;
+import com.pilot.service.model.TokenAuthentication;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,12 @@ import java.util.Date;
 @Component
 public class TokenAuthenticationManager implements AuthenticationManager {
 
+    private final UserDetailsService userDetailsService;
+
     @Autowired
-    private UserDetailsService userDetailsService;
+    public TokenAuthenticationManager(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

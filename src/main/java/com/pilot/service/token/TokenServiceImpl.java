@@ -1,7 +1,7 @@
 package com.pilot.service.token;
 
-import com.pilot.configuration.security.SecurityConstant;
-import com.pilot.model.entity.User;
+import com.pilot.service.model.SecurityConstant;
+import com.pilot.repository.model.entity.User;
 import com.pilot.repository.UserDao;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -21,8 +21,12 @@ import java.util.Map;
 @Service
 public class TokenServiceImpl implements TokenService {
 
+    private final UserDao userDao;
+
     @Autowired
-    private UserDao userDao;
+    public TokenServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     @Transactional

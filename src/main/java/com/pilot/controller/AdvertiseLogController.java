@@ -1,8 +1,8 @@
 package com.pilot.controller;
 
-import com.pilot.model.ChartEntry;
-import com.pilot.model.dto.AdvertiseLogDTO;
-import com.pilot.model.request.AdvertiseRequest;
+import com.pilot.service.model.ChartEntry;
+import com.pilot.service.model.dto.AdvertiseLogDTO;
+import com.pilot.controller.model.request.AdvertiseRequest;
 import com.pilot.service.AdvertiseLogService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -57,10 +57,10 @@ public class AdvertiseLogController {
     @ApiOperation(value = "getChartData", notes = "Get advertise logs and consolidate it in date periods", response = ChartEntry.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "mode", value = "Period consolidation step", required = true, dataType = "string"),
-            @ApiImplicitParam(name = "channels", value = "Channels", required = false, dataType = "long"),
-            @ApiImplicitParam(name = "advertises", value = "Advertises", required = false, dataType = "long"),
-            @ApiImplicitParam(name = "startDate", value = "Start date", required = false, dataType = "long"),
-            @ApiImplicitParam(name = "endDate", value = "End date", required = false, dataType = "long")
+            @ApiImplicitParam(name = "channels", value = "Channels", dataType = "long"),
+            @ApiImplicitParam(name = "advertises", value = "Advertises", dataType = "long"),
+            @ApiImplicitParam(name = "startDate", value = "Start date", dataType = "long"),
+            @ApiImplicitParam(name = "endDate", value = "End date", dataType = "long")
 
     })
     @ApiResponses(value = {
@@ -83,10 +83,10 @@ public class AdvertiseLogController {
     @ApiOperation(value = "getLogs", notes = "Get advertise logs", response = AdvertiseLogDTO.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "mode", value = "Period consolidation step", required = true, dataType = "string"),
-            @ApiImplicitParam(name = "channels", value = "Channels", required = false, dataType = "long"),
-            @ApiImplicitParam(name = "advertises", value = "Advertises", required = false, dataType = "long"),
-            @ApiImplicitParam(name = "startDate", value = "Start date", required = false, dataType = "long"),
-            @ApiImplicitParam(name = "endDate", value = "End date", required = false, dataType = "long")
+            @ApiImplicitParam(name = "channels", value = "Channels", dataType = "long"),
+            @ApiImplicitParam(name = "advertises", value = "Advertises", dataType = "long"),
+            @ApiImplicitParam(name = "startDate", value = "Start date", dataType = "long"),
+            @ApiImplicitParam(name = "endDate", value = "End date", dataType = "long")
 
     })
     @ApiResponses(value = {

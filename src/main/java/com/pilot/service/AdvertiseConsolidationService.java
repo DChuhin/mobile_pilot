@@ -1,7 +1,7 @@
 package com.pilot.service;
 
-import com.pilot.model.ChartContext;
-import com.pilot.model.ChartEntry;
+import com.pilot.service.model.ChartContext;
+import com.pilot.service.model.ChartEntry;
 
 import java.util.List;
 
