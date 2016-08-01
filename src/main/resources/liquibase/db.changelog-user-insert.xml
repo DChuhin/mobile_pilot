@@ -3,7 +3,9 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
-
-    <include file="liquibase/db.changelog-initial-schema.xml"/>
-    <include file="liquibase/db.changelog-user-insert.xml"/>
+    <changeSet id="init_test_user" author="daniil.chukhin@oxagile.com">
+        <sql>
+            INSERT INTO `T_USER` (`F_NAME`, `F_PASSWORD`) VALUES ('user', 'Test1234');
+        </sql>
+    </changeSet>
 </databaseChangeLog>
