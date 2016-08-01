@@ -30,6 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(apiAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/token").permitAll()
+                .antMatchers("/index").permitAll()
+                .antMatchers("/js/**").permitAll()
                 .anyRequest().authenticated();
 
     }

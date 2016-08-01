@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html labg="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <title>Mobile Pilot</title>
+    <style>
+        .silver {
+            background-color: silver;
+            margin: 5%;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript" th:src="@{/js/lib/angular.js}"></script>
+    <script type="text/javascript" th:src="@{/js/src/app.js}"></script>
+</head>
+<body ng-app="app" ng-controller="Main as main">
+
+<h2>PILOT SYSTEM UI</h2>
+<div style="position: relative; overflow: hidden; float: left; width: 100%">
+    <div class="silver" style="width: 90%; float: left">
+        <div style="position: relative; width: 20%; float: right">
+            <input type="password" ng-model="main.password" placeholder="password"/><br/>
+        </div>
+        <div style="position: relative; width: 20%; float: right">
+            <input type="text" ng-model="main.username" placeholder="username"/><br/>
+        </div>
+    </div>
+    <button style="background-color: silver; position: relative; width: 10%" ng-click="main.login()"
+            ng-if="!main.isAuthed()">Login
+    </button>
+    <button style="background-color: silver; position: relative; width: 10%" ng-click="main.logout()"
+            ng-if="main.isAuthed()">Logout
+    </button>
+</div>
+<br/>
+
+<br/><br/>
+
+<br/><br/><br/>
+</body>
+</html>
