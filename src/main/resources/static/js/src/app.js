@@ -1,4 +1,4 @@
-;(function () {
+(function () {
     function authInterceptor(API, auth) {
         return {
             // automatically attach Authorization header
@@ -43,43 +43,15 @@
         }
     }
 
-    function userService($http, API, auth) {
+    function userService($http, API) {
         var self = this;
-        self.getQuote = function () {
-            return $http.get(API + '/auth/quote')
-        };
-        // add authentication methods here
         self.login = function (username, password) {
             return $http.post(API + '/token?username=' + username + "&password=" + password)
         };
 
     }
 
-// We won't touch anything in here
-    function MainCtrl(user, auth) {
-        var self = this;
-
-        function handleRequest(res) {
-            var token = res.data ? res.data.token : null;
-            if (token) {
-                console.log('JWT:', token);
-            }
-            self.message = res.data.message;
-        }
-
-        self.login = function () {
-            user.login(self.username, self.password)
-                .then(handleRequest, handleRequest)
-        };
-        self.logout = function () {
-            auth.logout && auth.logout()
-        };
-        self.isAuthed = function () {
-            return auth.isAuthed ? auth.isAuthed() : false
-        }
-    }
-
-    angular.module('app', [])
+    var app = angular.module('app', ['ui.router'])
         .factory('authInterceptor', authInterceptor)
         .service('user', userService)
         .service('auth', authService)
@@ -87,5 +59,4 @@
         .config(function ($httpProvider) {
             $httpProvider.interceptors.push('authInterceptor');
         })
-        .controller('Main', MainCtrl)
 })();

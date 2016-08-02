@@ -5,13 +5,12 @@
     <style>
         .silver {
             background-color: silver;
-            padding: 5%;
-            position: relative;
         }
 
         .button {
             background-color: silver;
             color: black;
+            margin: 5px;
             padding: 15px 32px;
             border: 1px white;
             text-align: center;
@@ -23,56 +22,43 @@
     <link th:href="@{/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/bootstrap/dist/css/bootstrap-theme.min.css}" rel="stylesheet"/>
     <script type="text/javascript" th:src="@{/js/lib/angular.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lib/angular-ui-router.js}"></script>
     <script type="text/javascript" th:src="@{/js/src/app.js}"></script>
+    <script type="text/javascript" th:src="@{/js/src/mainController.js}"></script>
+    <script type="text/javascript" th:src="@{/js/src/logController.js}"></script>
+    <script type="text/javascript" th:src="@{/js/src/route.js}"></script>
 </head>
 <body ng-app="app" ng-controller="Main as main">
 <h2>PILOT SYSTEM UI</h2>
 <div class="container" role="main" style="width: 100%">
-<div class="silver row">
-    <div class="col-md-7"></div>
-    <div class="col-md-1">
-        <input type="text" ng-model="main.username"
-               placeholder="username"/>
-    </div>
-    <div class="col-md-1">
-        <input type="password" ng-model="main.password"
-               placeholder="password"/>
-    </div>
-    <div class="col-md-1">
-        <button class="button" style="width: 10%; height: 100%; position: relative;"
-                ng-click="main.login()"
-                ng-if="!main.isAuthed()">Login
-        </button>
-        <button class="button" style="width: 10%; height: 100%" ng-click="main.logout()"
-                ng-if="main.isAuthed()">Logout
-        </button>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-3">.col-md-8</div>
-    <div class="col-md-7">.col-md-4</div>
-</div>
-<div class="row">
-    <div class="col-md-4">.col-md-4</div>
-    <div class="col-md-4">.col-md-4</div>
-    <div class="col-md-4">.col-md-4</div>
-</div>
-<div class="row">
-    <div class="col-md-6">.col-md-6</div>
-    <div class="col-md-6">.col-md-6</div>
-</div>
-<div class="container" role="main" style="width: 100%">
-    <div class="row" style="height: 50px">
-        <div class="silver col-sm-6" style="width: inherit; height: 100%; position: relative"></div>
-        <div class="silver col-sm-6" style="width: auto; height: 100%; position: relative">
-            <input type="text" ng-model="main.username"
+    <div class="silver row">
+        <div class="col-md-7"></div>
+        <div class="col-md-2">
+            <input ng-show="!main.isAuthed()" style="float: right" type="text" ng-model="main.username"
                    placeholder="username"/>
         </div>
-        <div class="silver col-sm-6" style="width: auto; height: 100%; position: relative">
-            <input type="password" ng-model="main.password"
+        <div class="col-md-2">
+            <input ng-show="!main.isAuthed()" style="float: left" type="password" ng-model="main.password"
                    placeholder="password"/>
         </div>
-
+        <div class="col-md-1">
+            <button class="button"
+                    ng-click="main.login()"
+                    ng-if="!main.isAuthed()">Login
+            </button>
+            <button class="button"
+                    ng-click="main.logout()"
+                    ng-if="main.isAuthed()">Logout
+            </button>
+        </div>
+    </div>
+    <div class="row" ng-show="main.isAuthed()">
+        <div class="col-md-3">
+            <a class="button" style="width: 100%" ui-sref="dashboard">Dashboard</a>
+            <a class="button" style="width: 100%" ui-sref="logs">Logs</a>
+        </div>
+        <div class="col-md-9" ui-view="">
+        </div>
     </div>
 </div>
 </body>

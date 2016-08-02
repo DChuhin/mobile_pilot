@@ -5,12 +5,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/index")
 public class PageController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String getIndexPage() {
         return "index";
+    }
+
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    public String getDashboardPage() {
+        return "dashboard";
+    }
+
+    @RequestMapping(value = "/logs", method = RequestMethod.GET)
+    public String getLogsPage() {
+        return "logs";
     }
 
 }

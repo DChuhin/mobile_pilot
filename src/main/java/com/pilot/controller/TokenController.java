@@ -7,9 +7,13 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Token controller
@@ -39,7 +43,9 @@ public class TokenController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/token")
-    public String getToken(String username, String password) {
-        return tokenService.getToken(username, password);
+    public Map<String, Object> getToken(String username, String password) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("token", tokenService.getToken(username, password));
+        return result;
     }
 }

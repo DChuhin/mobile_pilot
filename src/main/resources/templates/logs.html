@@ -1,0 +1,8 @@
+<div ng-app="app" ng-controller="logController as logCtrl">
+    <h1>Logs</h1>
+    <div class="row" ng-repeat="log in logCtrl.logs">
+        {{ 'advertise: ' + log.advertiseId + ', channel: ' + log.channelId + ', device: ' + log.deviceId + ', date: '
+        }}
+        {{log.date | cmdate}}
+    </div>
+</div>
