@@ -1,8 +1,8 @@
 package com.pilot.repository.impl;
 
-import com.pilot.repository.model.entity.AdvertiseLog;
 import com.pilot.controller.model.request.AdvertiseRequest;
 import com.pilot.repository.AdvertiseLogDao;
+import com.pilot.repository.model.entity.AdvertiseLog;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;

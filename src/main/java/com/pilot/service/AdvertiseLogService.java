@@ -1,8 +1,8 @@
 package com.pilot.service;
 
-import com.pilot.service.model.ChartEntry;
-import com.pilot.service.model.dto.AdvertiseLogDTO;
 import com.pilot.controller.model.request.AdvertiseRequest;
+import com.pilot.service.model.ChartResponse;
+import com.pilot.service.model.dto.AdvertiseLogDTO;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public interface AdvertiseLogService {
      * @param advertiseRequest request
      * @return Chart data set
      */
-    List<ChartEntry> getChartData(AdvertiseRequest advertiseRequest);
+    ChartResponse getChartData(AdvertiseRequest advertiseRequest);
 
     /**
      * Get logs
@@ -34,4 +34,11 @@ public interface AdvertiseLogService {
      * @return logs DTOs
      */
     List<AdvertiseLogDTO> getLogs(AdvertiseRequest advertiseRequest);
+
+    /**
+     * Get available advertise ids
+     *
+     * @return List ids
+     */
+    List<Long> getAdvertises();
 }

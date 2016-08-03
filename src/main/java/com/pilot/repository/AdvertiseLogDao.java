@@ -1,7 +1,7 @@
 package com.pilot.repository;
 
-import com.pilot.repository.model.entity.AdvertiseLog;
 import com.pilot.controller.model.request.AdvertiseRequest;
+import com.pilot.repository.model.entity.AdvertiseLog;
 
 import java.util.List;
 

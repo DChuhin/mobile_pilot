@@ -1,8 +1,8 @@
 package com.pilot.service.token;
 
-import com.pilot.service.model.SecurityConstant;
-import com.pilot.repository.model.entity.User;
 import com.pilot.repository.UserDao;
+import com.pilot.repository.model.entity.User;
+import com.pilot.service.model.SecurityConstant;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

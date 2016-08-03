@@ -1,9 +1,7 @@
 package com.pilot.service;
 
 import com.pilot.service.model.ChartContext;
-import com.pilot.service.model.ChartEntry;
-
-import java.util.List;
+import com.pilot.service.model.ChartResponse;
 
 /**
  * Advertise Consolidation Service
@@ -16,6 +14,6 @@ public interface AdvertiseConsolidationService {
      * @param context context
      * @return List
      */
-    List<ChartEntry> consolidateChartData(ChartContext context);
+    ChartResponse consolidateChartData(ChartContext context);
 
 }

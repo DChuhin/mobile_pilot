@@ -1,1 +1,53 @@
-<h1>Dshboard</h1>
+<style>
+    hr {
+        border: 0;
+        clear: both;
+        display: block;
+        width: 100%;
+        background-color: silver;
+        height: 3px;
+    }
+</style>
+<div ng-app="app" ng-controller="dashboardController as ctrl">
+    <h2>Run Report</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div>Date From To:</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="date" ng-model="ctrl.startDate" ng-change="ctrl.setStartDate()" placeholder="from"
+                           class="form-control input-sm"/>
+                </div>
+                <div class="col-md-6">
+                    <input type="date" ng-model="ctrl.endDate" ng-change="ctrl.setEndDate()" placeholder="to"
+                           class="form-control input-sm"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div>Advertises</div>
+            <div class="row">
+                <div class="col-md-1" ng-repeat="advertise in ctrl.advertises">
+                    <label class="checkbox inline">
+                        <input type="checkbox" value="{{advertise}}"
+                               ng-checked="ctrl.filterParams.advertises.indexOf(advertise)> -1"
+                               ng-click="ctrl.toggleAdvertise(advertise)"/>
+                        {{advertise}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label>
+                <input type="radio" ng-model="ctrl.filterParams.mode" value="DAY" ng-change="ctrl.getReport()"/>
+                Day View</label>
+            <label>
+                <input type="radio" ng-model="ctrl.filterParams.mode" value="HOUR" ng-change="ctrl.getReport()"/>
+                Hour View</label>
+        </div>
+    </div>
+    <div id="line">
+        <hr/>
+    </div>
+    <div id="chart"></div>
+</div>

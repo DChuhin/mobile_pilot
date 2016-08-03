@@ -1,7 +1,7 @@
 package com.pilot.service.model;
 
-import com.pilot.repository.model.entity.AdvertiseLog;
 import com.pilot.controller.model.request.AdvertiseRequest;
+import com.pilot.repository.model.entity.AdvertiseLog;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ public class ChartContext {
     private Long startDate;
 
     private Long endDate;
+
 
     /**
      * public constructor

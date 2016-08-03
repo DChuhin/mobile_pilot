@@ -1,9 +1,10 @@
 package com.pilot.controller;
 
-import com.pilot.service.model.ChartEntry;
-import com.pilot.service.model.dto.AdvertiseLogDTO;
 import com.pilot.controller.model.request.AdvertiseRequest;
 import com.pilot.service.AdvertiseLogService;
+import com.pilot.service.model.ChartEntry;
+import com.pilot.service.model.ChartResponse;
+import com.pilot.service.model.dto.AdvertiseLogDTO;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -70,7 +71,7 @@ public class AdvertiseLogController {
             @ApiResponse(code = 404, message = "Not Found")
     })
     @RequestMapping(value = "api/logs/chart", method = RequestMethod.GET)
-    public List<ChartEntry> getChartData(AdvertiseRequest advertiseRequest) {
+    public ChartResponse getChartData(AdvertiseRequest advertiseRequest) {
         return advertiseLogService.getChartData(advertiseRequest);
     }
 
@@ -98,6 +99,23 @@ public class AdvertiseLogController {
     @RequestMapping(value = "api/logs", method = RequestMethod.GET)
     public List<AdvertiseLogDTO> getLogs(AdvertiseRequest advertiseRequest) {
         return advertiseLogService.getLogs(advertiseRequest);
+    }
+
+    /**
+     * Get advertises
+     *
+     * @return advertise ids
+     */
+    @ApiOperation(value = "getAdvertises", notes = "Get available advertise ids", response = AdvertiseLogDTO.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = Long.class),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 403, message = "Forbidden"),
+            @ApiResponse(code = 404, message = "Not Found")
+    })
+    @RequestMapping(value = "api/advertises", method = RequestMethod.GET)
+    public List<Long> getAdvertises() {
+        return advertiseLogService.getAdvertises();
     }
 
 }

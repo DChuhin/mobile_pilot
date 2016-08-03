@@ -1,7 +1,7 @@
 package com.pilot.service;
 
-import com.pilot.repository.model.entity.User;
 import com.pilot.repository.UserDao;
+import com.pilot.repository.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
