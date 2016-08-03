@@ -22,4 +22,9 @@ public class PageController {
         return "logs";
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String redirect() {
+        return "redirect:index";
+    }
+
 }
