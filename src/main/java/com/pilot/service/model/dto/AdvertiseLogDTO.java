@@ -26,6 +26,15 @@ public class AdvertiseLogDTO {
         deviceId = builder.deviceId;
     }
 
+    /**
+     * Default constructor
+     */
+    public AdvertiseLogDTO() {
+        /**
+         * emtyp for swagger
+         */
+    }
+
     public static Builder newBuilder() {
         return new Builder();
     }

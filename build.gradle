@@ -40,5 +40,7 @@ dependencies {
     compile 'io.jsonwebtoken:jjwt:0.6.0'
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.4.0'
     compile group: 'io.springfox', name: 'springfox-spring-web', version: '2.4.0'
+    compile("org.springframework.social:spring-social-twitter")
+    compile 'org.springframework.social:spring-social-facebook:2.0.3.RELEASE'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

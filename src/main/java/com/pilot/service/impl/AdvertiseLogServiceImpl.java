@@ -5,6 +5,7 @@ import com.pilot.repository.AdvertiseLogDao;
 import com.pilot.repository.model.entity.AdvertiseLog;
 import com.pilot.service.AdvertiseConsolidationService;
 import com.pilot.service.AdvertiseLogService;
+import com.pilot.service.SocialService;
 import com.pilot.service.model.ChartContext;
 import com.pilot.service.model.ChartResponse;
 import com.pilot.service.model.dto.AdvertiseLogDTO;
@@ -28,10 +29,13 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
 
     private final AdvertiseLogDao advertiseLogDao;
 
+    private final SocialService socialService;
+
     @Autowired
-    public AdvertiseLogServiceImpl(AdvertiseLogDao advertiseLogDao, AdvertiseConsolidationService advertiseConsolidationService) {
+    public AdvertiseLogServiceImpl(AdvertiseLogDao advertiseLogDao, AdvertiseConsolidationService advertiseConsolidationService, SocialService socialService) {
         this.advertiseLogDao = advertiseLogDao;
         this.advertiseConsolidationService = advertiseConsolidationService;
+        this.socialService = socialService;
     }
 
     @Override
@@ -41,6 +45,7 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
         advertiseLog.setChannelId(advertiseLogDTO.getChannelId());
         advertiseLog.setDate(new Date().getTime());
         advertiseLogDao.saveOrUpdate(advertiseLog);
+        socialService.postAdvertiseLog(advertiseLogDTO);
         return AdvertiseLogDTO.newBuilder().build(advertiseLog);
     }
 

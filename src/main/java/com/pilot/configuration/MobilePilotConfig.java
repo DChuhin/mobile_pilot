@@ -18,7 +18,8 @@ import javax.annotation.PostConstruct;
 @PropertySource(value = {
         "classpath:application.properties",
         "classpath:liquibase.properties",
-        "classpath:jdbc.properties"
+        "classpath:jdbc.properties",
+        "classpath:social.properties"
 })
 @ComponentScan({"com.pilot"})
 public class MobilePilotConfig {
