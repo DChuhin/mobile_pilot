@@ -63,7 +63,7 @@
             </button>
         </div>
     </div>
-    <div class="row" ng-show="main.isAuthed()">
+    <div class="row" ng-if="main.isAuthed()">
         <div class="col-md-3">
             <a class="button" style="width: 100%" ui-sref="dashboard">Dashboard</a>
             <a class="button" style="width: 100%" ui-sref="logs">Logs</a>
