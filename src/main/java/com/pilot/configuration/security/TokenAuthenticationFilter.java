@@ -38,30 +38,18 @@ class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         String token = request.getHeader(SecurityConstant.HEADER_SECURITY_TOKEN);
-        Authentication userAuthenticationToken = authUserByToken(token);
-        if (userAuthenticationToken == null) {
+        if (token == null) {
             throw new AuthenticationServiceException(MessageFormat.format("Error | {0}", "Bad Token"));
+        } else {
+            Authentication userAuthenticationToken = new TokenAuthentication(token);
+            return getAuthenticationManager().authenticate(userAuthenticationToken);
         }
-        return getAuthenticationManager().authenticate(userAuthenticationToken);
     }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain chain) throws IOException, ServletException {
         super.doFilter(req, res, chain);
-    }
-
-    private Authentication authUserByToken(String token) {
-        if (token == null) {
-            return null;
-        }
-        Authentication authToken = new TokenAuthentication(token);
-        try {
-            return authToken;
-        } catch (Exception e) {
-            logger.error("Authenticate user by token error: ", e);
-        }
-        return authToken;
     }
 
     @Override

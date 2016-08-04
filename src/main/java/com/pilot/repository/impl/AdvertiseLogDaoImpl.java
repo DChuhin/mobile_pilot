@@ -24,6 +24,10 @@ public class AdvertiseLogDaoImpl extends AbstractGenericDaoImpl<AdvertiseLog, Lo
     public List<AdvertiseLog> getChartListByRequest(AdvertiseRequest advertiseRequest) {
         DetachedCriteria criteria = DetachedCriteria.forClass(getPersistentClass());
 
+        if (advertiseRequest == null) {
+            return find(criteria);
+        }
+
         List<Long> advertises = advertiseRequest.getAdvertises();
         List channels = advertiseRequest.getChannels();
 

@@ -30,13 +30,8 @@ public class TokenAuthenticationManager implements AuthenticationManager {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        try {
-            if (authentication instanceof TokenAuthentication) {
-                return processAuthentication((TokenAuthentication) authentication);
-            }
-        } catch (Exception ex) {
-            if (ex instanceof AuthenticationServiceException)
-                throw ex;
+        if (authentication instanceof TokenAuthentication) {
+            return processAuthentication((TokenAuthentication) authentication);
         }
         authentication.setAuthenticated(false);
         return authentication;

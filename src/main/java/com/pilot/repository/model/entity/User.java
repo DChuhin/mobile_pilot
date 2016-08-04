@@ -6,11 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "T_USER")
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -2287636573275040506L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

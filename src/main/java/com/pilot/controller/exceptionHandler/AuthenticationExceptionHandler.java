@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationCredentialsNotF
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice(basePackages = "com.pilot.controller")
@@ -19,7 +18,6 @@ class AuthenticationExceptionHandler {
 
     @ExceptionHandler(AuthenticationCredentialsNotFoundException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ResponseBody
     public Response throwAuthException(AuthenticationCredentialsNotFoundException ex) {
         LOGGER.error(ex.toString(), ex);
         return new Response(HttpStatus.BAD_REQUEST.getReasonPhrase(), ex.getMessage());

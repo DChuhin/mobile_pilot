@@ -57,11 +57,11 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
         }
         ChartContext chartContext = new ChartContext(advertiseRequest);
         chartContext.setAdvertiseLogList(advertises);
-        checkDates(chartContext);
+        processDates(chartContext);
         return advertiseConsolidationService.consolidateChartData(chartContext);
     }
 
-    private void checkDates(ChartContext chartContext) {
+    private void processDates(ChartContext chartContext) {
         if (chartContext.getStartDate() == null) {
             long start = chartContext.getAdvertiseLogList()
                     .stream()
@@ -88,7 +88,7 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
 
     @Override
     public List<Long> getAdvertises() {
-        return new ArrayList<>(advertiseLogDao.getChartListByRequest(new AdvertiseRequest())
+        return new ArrayList<>(advertiseLogDao.getChartListByRequest(null)
                 .stream()
                 .map(AdvertiseLog::getAdvertiseId)
                 .collect(Collectors.toSet()));
