@@ -8,29 +8,7 @@ import java.util.List;
 /**
  * Advertise log dao
  */
-public interface AdvertiseLogDao {
-
-    /**
-     * Save or update
-     *
-     * @param advertiseLog object
-     */
-    void saveOrUpdate(AdvertiseLog advertiseLog);
-
-    /**
-     * Delete
-     *
-     * @param advertiseLog object
-     */
-    void delete(AdvertiseLog advertiseLog);
-
-    /**
-     * Get
-     *
-     * @param id object id
-     * @return AdvertiseLog
-     */
-    AdvertiseLog get(long id);
+public interface AdvertiseLogDao extends GenericDao<AdvertiseLog, Long> {
 
     /**
      * Get advertise logs

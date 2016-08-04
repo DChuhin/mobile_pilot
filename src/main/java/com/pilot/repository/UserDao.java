@@ -5,7 +5,7 @@ import com.pilot.repository.model.entity.User;
 /**
  * User dao
  */
-public interface UserDao {
+public interface UserDao extends GenericDao<User, Long> {
 
     /**
      * Get user by username

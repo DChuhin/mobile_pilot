@@ -3,10 +3,8 @@ package com.pilot.repository.impl;
 import com.pilot.controller.model.request.AdvertiseRequest;
 import com.pilot.repository.AdvertiseLogDao;
 import com.pilot.repository.model.entity.AdvertiseLog;
-import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,34 +13,16 @@ import java.util.List;
  * Advertise log dao impl
  */
 @Repository
-public class AdvertiseLogDaoImpl implements AdvertiseLogDao {
+public class AdvertiseLogDaoImpl extends AbstractGenericDaoImpl<AdvertiseLog, Long> implements AdvertiseLogDao {
 
-    private final SessionFactory sessionFactory;
-
-    @Autowired
-    public AdvertiseLogDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    @Override
+    public Class<AdvertiseLog> getPersistentClass() {
+        return AdvertiseLog.class;
     }
 
     @Override
-    public void saveOrUpdate(AdvertiseLog advertiseLog) {
-        sessionFactory.getCurrentSession().saveOrUpdate(advertiseLog);
-    }
-
-    @Override
-    public void delete(AdvertiseLog advertiseLog) {
-        sessionFactory.getCurrentSession().delete(advertiseLog);
-    }
-
-    @Override
-    public AdvertiseLog get(long id) {
-        return (AdvertiseLog) sessionFactory.getCurrentSession().get(AdvertiseLog.class, id);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
     public List<AdvertiseLog> getChartListByRequest(AdvertiseRequest advertiseRequest) {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(AdvertiseLog.class);
+        DetachedCriteria criteria = DetachedCriteria.forClass(getPersistentClass());
 
         List<Long> advertises = advertiseRequest.getAdvertises();
         List channels = advertiseRequest.getChannels();
@@ -63,6 +43,6 @@ public class AdvertiseLogDaoImpl implements AdvertiseLogDao {
             criteria.add(Restrictions.le("date", advertiseRequest.getEndDate()));
         }
 
-        return (List<AdvertiseLog>) criteria.list();
+        return find(criteria);
     }
 }
