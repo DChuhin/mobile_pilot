@@ -45,7 +45,7 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
         advertiseLog.setChannelId(advertiseLogDTO.getChannelId());
         advertiseLog.setDate(new Date().getTime());
         advertiseLogDao.saveOrUpdate(advertiseLog);
-        socialService.postAdvertiseLog(advertiseLogDTO);
+        socialService.postAdvertiseLog(AdvertiseLogDTO.newBuilder().build(advertiseLog));
         return AdvertiseLogDTO.newBuilder().build(advertiseLog);
     }
 
