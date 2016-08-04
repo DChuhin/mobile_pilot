@@ -34,13 +34,21 @@ app.controller('dashboardController', ['$scope', '$http', 'API', 'chart', functi
         self.getReport();
     };
 
+    function convertToUtcMillis(date) {
+        var offset = date.getTimezoneOffset() * 60000;
+        return date.getTime() - offset;
+    }
+
     self.setStartDate = function () {
-        self.filterParams.startDate = self.startDate.getTime();
+        self.filterParams.startDate = convertToUtcMillis(self.startDate);
         self.getReport();
     };
 
     self.setEndDate = function () {
-        self.filterParams.endDate = self.endDate.getTime();
+        var date = self.endDate;
+        date.setDate(date.getDate() + 1);
+        date.setMilliseconds(date.getMilliseconds() - 1);
+        self.filterParams.endDate = convertToUtcMillis(date);
         self.getReport();
     };
 

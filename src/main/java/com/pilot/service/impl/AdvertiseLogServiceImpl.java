@@ -52,6 +52,9 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
     @Override
     public ChartResponse getChartData(AdvertiseRequest advertiseRequest) {
         List<AdvertiseLog> advertises = advertiseLogDao.getChartListByRequest(advertiseRequest);
+        if (advertises.isEmpty()) {
+            return new ChartResponse();
+        }
         ChartContext chartContext = new ChartContext(advertiseRequest);
         chartContext.setAdvertiseLogList(advertises);
         checkDates(chartContext);
