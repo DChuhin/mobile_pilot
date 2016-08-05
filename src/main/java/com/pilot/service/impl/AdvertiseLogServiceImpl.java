@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -55,11 +54,12 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
         List<AdvertiseLog> advertises = advertiseLogDao.getChartListByRequest(advertiseRequest);
         if (advertises.isEmpty()) {
             return new ChartResponse();
+        } else {
+            ChartContext chartContext = new ChartContext(advertiseRequest);
+            chartContext.setAdvertiseLogList(advertises);
+            processDates(chartContext);
+            return advertiseConsolidationService.consolidateChartData(chartContext);
         }
-        ChartContext chartContext = new ChartContext(advertiseRequest);
-        chartContext.setAdvertiseLogList(advertises);
-        processDates(chartContext);
-        return advertiseConsolidationService.consolidateChartData(chartContext);
     }
 
     private void processDates(ChartContext chartContext) {
