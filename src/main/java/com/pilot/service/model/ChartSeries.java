@@ -2,9 +2,9 @@ package com.pilot.service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.ImmutableList;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,7 +56,7 @@ public class ChartSeries {
 
     @JsonProperty("data")
     public List<Long> getChartSeriesData() {
-        return new ArrayList<>(counts.values());
+        return ImmutableList.copyOf(counts.values());
     }
 
 }

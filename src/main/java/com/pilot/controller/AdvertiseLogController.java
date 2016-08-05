@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Advertise log controller
@@ -118,7 +119,7 @@ public class AdvertiseLogController {
             @ApiResponse(code = 404, message = "Not Found")
     })
     @RequestMapping(value = "api/advertises", method = RequestMethod.GET)
-    public List<Long> getAdvertises() {
+    public Set<Long> getAdvertises() {
         return advertiseLogService.getAdvertises();
     }
 

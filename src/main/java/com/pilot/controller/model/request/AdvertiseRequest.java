@@ -12,9 +12,9 @@ public class AdvertiseRequest {
 
     private ChartMode mode;
 
-    private List<Long> channels = new ArrayList<>();
+    private List<Long> channels;
 
-    private List<Long> advertises = new ArrayList<>();
+    private List<Long> advertises;
 
     private Long startDate;
 

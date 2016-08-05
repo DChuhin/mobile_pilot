@@ -5,6 +5,7 @@ import com.pilot.service.model.ChartResponse;
 import com.pilot.service.model.dto.AdvertiseLogDTO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Advertise Log Service
@@ -38,7 +39,7 @@ public interface AdvertiseLogService {
     /**
      * Get available advertise ids
      *
-     * @return List ids
+     * @return Set ids
      */
-    List<Long> getAdvertises();
+    Set<Long> getAdvertises();
 }

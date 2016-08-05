@@ -1,5 +1,6 @@
 package com.pilot.service.impl;
 
+import com.google.common.collect.ImmutableList;
 import com.pilot.service.AdvertiseConsolidationService;
 import com.pilot.service.model.ChartContext;
 import com.pilot.service.model.ChartMode;
@@ -12,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +49,7 @@ public class AdvertiseConsolidationServiceImpl implements AdvertiseConsolidation
 
         ChartResponse chartResponse = new ChartResponse();
         chartResponse.setCategories(categories);
-        chartResponse.setSeries(new ArrayList<>(chartSeries.values()));
+        chartResponse.setSeries(ImmutableList.copyOf(chartSeries.values()));
         return chartResponse;
     }
 
