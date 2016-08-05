@@ -2,7 +2,6 @@ package com.pilot.controller.model.request;
 
 import com.pilot.service.model.ChartMode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
