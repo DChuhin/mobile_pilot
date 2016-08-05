@@ -16,7 +16,10 @@
                 if (res.config.url.indexOf(API) === 0 && res.data.token) {
                     auth.saveToken(res.data.token);
                 }
-
+                if (res.data === "Token expired date error") {
+                    alert("Session expired. Login again");
+                    auth.logout();
+                }
                 return res;
             }
         }
