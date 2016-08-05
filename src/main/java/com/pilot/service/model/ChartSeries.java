@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableList;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,8 +24,8 @@ public class ChartSeries {
     /**
      * Public constructor
      */
-    public ChartSeries(Set<LocalDateTime> xAxis) {
-        counts = new TreeMap<>();
+    public ChartSeries(List<LocalDateTime> xAxis) {
+        counts = new LinkedHashMap<>();
         xAxis.forEach(date -> counts.put(date, 0L));
     }
 

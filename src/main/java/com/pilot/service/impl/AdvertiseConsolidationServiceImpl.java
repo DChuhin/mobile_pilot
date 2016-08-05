@@ -14,10 +14,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -30,7 +29,7 @@ public class AdvertiseConsolidationServiceImpl implements AdvertiseConsolidation
 
     @Override
     public ChartResponse consolidateChartData(ChartContext context) {
-        Set<LocalDateTime> xAxis = initXAxis(context);
+        List<LocalDateTime> xAxis = initXAxis(context);
         Map<Long, ChartSeries> chartSeries = new HashMap<>();
         context.getAdvertiseLogList().forEach(advertiseLog -> {
             ChartSeries series = chartSeries.get(advertiseLog.getChannelId());
@@ -53,23 +52,23 @@ public class AdvertiseConsolidationServiceImpl implements AdvertiseConsolidation
         return chartResponse;
     }
 
-    private ChartSeries createNewSeries(Set<LocalDateTime> xAxis, long channelId) {
+    private ChartSeries createNewSeries(List<LocalDateTime> xAxis, long channelId) {
         ChartSeries chartSeries = new ChartSeries(xAxis);
         chartSeries.setName("" + channelId);
         return chartSeries;
     }
 
-    private Set<LocalDateTime> initXAxis(ChartContext context) {
+    private List<LocalDateTime> initXAxis(ChartContext context) {
         ChronoUnit chronoUnit = context.getMode() == ChartMode.DAY ? ChronoUnit.DAYS : ChronoUnit.HOURS;
         LocalDateTime start = extractRoundedDate(context, context.getStartDate());
         LocalDateTime end = extractRoundedDate(context, context.getEndDate());
 
-        Set<LocalDateTime> set = new TreeSet<>();
+        List<LocalDateTime> list = new LinkedList<>();
         while (start.compareTo(end) <= 0) {
-            set.add(start);
+            list.add(start);
             start = start.plus(1, chronoUnit);
         }
-        return set;
+        return list;
     }
 
     private LocalDateTime extractRoundedDate(ChartContext context, long longDate) {
