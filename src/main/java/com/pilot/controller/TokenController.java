@@ -21,8 +21,12 @@ import java.util.Map;
 @Api(tags = "Endpoint for token generation")
 public class TokenController {
 
+    private final TokenService tokenService;
+
     @Autowired
-    private TokenService tokenService;
+    public TokenController(TokenService tokenService) {
+        this.tokenService = tokenService;
+    }
 
     /**
      * Get token

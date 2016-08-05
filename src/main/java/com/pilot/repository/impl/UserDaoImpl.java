@@ -2,11 +2,10 @@ package com.pilot.repository.impl;
 
 import com.pilot.repository.UserDao;
 import com.pilot.repository.model.entity.User;
-import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * User dao impl
@@ -14,21 +13,16 @@ import java.util.List;
 @Repository
 public class UserDaoImpl extends AbstractGenericDaoImpl<User, Long> implements UserDao {
 
+    @Autowired
+    public UserDaoImpl(HibernateBaseDao baseDao) {
+        super(baseDao);
+    }
+
     @Override
     public User getUserByUserName(String name) {
-        DetachedCriteria criteria = DetachedCriteria.forClass(getPersistentClass());
+        Criteria criteria = createCriteria();
         criteria.add(Restrictions.eq("name", name));
-        List<User> users = find(criteria);
-        if (users.isEmpty()) {
-            return null;
-        } else {
-            if (users.size() != 1) {
-                throw new IllegalStateException();
-            } else {
-                return users.get(0);
-            }
-        }
-
+        return (User) criteria.uniqueResult();
     }
 
     @Override

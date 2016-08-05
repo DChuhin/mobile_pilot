@@ -1,6 +1,6 @@
 package com.pilot.repository;
 
-import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.Criteria;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -22,6 +22,13 @@ public interface GenericDao<T, I extends Serializable> {
      * @return actual persistent object's name
      */
     Class<T> getPersistentClass();
+
+    /**
+     * Create criteria
+     *
+     * @return Criteria
+     */
+    Criteria createCriteria();
 
     /**
      * Gets an entity using the given unique id
@@ -67,15 +74,10 @@ public interface GenericDao<T, I extends Serializable> {
     List<T> getAll();
 
     /**
-     * Flush changes
-     */
-    void flush();
-
-    /**
-     * Gets list of entities in the datastore by the filter
+     * Gets list of entities in the datastore
      *
-     * @param detachedCriteria criteria
+     * @param criteria criteria
      * @return List<T>
      */
-    List<T> find(DetachedCriteria detachedCriteria);
+    List<T> find(Criteria criteria);
 }

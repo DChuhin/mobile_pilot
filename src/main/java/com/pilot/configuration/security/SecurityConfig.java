@@ -1,5 +1,6 @@
 package com.pilot.configuration.security;
 
+import com.pilot.service.model.SecurityConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .addFilterAfter(apiAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/api/**").authenticated()
+                .antMatchers(SecurityConstant.API_URL).authenticated()
                 .anyRequest().permitAll();
 
     }

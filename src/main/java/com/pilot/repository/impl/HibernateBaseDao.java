@@ -1,9 +1,8 @@
 package com.pilot.repository.impl;
 
 import com.pilot.repository.BaseDao;
-import org.hibernate.Session;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -15,12 +14,16 @@ import java.util.Collection;
 import java.util.List;
 
 @Repository
-public class HibernateBaseDao extends HibernateDaoSupport implements BaseDao {
+class HibernateBaseDao extends HibernateDaoSupport implements BaseDao {
 
     private static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(HibernateBaseDao.class);
 
+    private final SessionFactory sessionFactory;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    public HibernateBaseDao(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     /**
      * Init session factory
@@ -28,11 +31,6 @@ public class HibernateBaseDao extends HibernateDaoSupport implements BaseDao {
     @PostConstruct
     public void init() {
         setSessionFactory(sessionFactory);
-    }
-
-    @Override
-    public Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
     }
 
     @Override
@@ -80,12 +78,17 @@ public class HibernateBaseDao extends HibernateDaoSupport implements BaseDao {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> List<T> find(Class<T> tClass, DetachedCriteria criteria) {
+    public <T> List<T> find(Criteria criteria) {
         try {
-            return (List<T>) getHibernateTemplate().findByCriteria(criteria);
+            return criteria.list();
         } catch (DataAccessException e) {
             LOGGER.debug(e.toString(), e);
             throw e;
         }
+    }
+
+    @Override
+    public <T> Criteria createCriteria(Class<T> persistentClass) {
+        return sessionFactory.getCurrentSession().createCriteria(persistentClass);
     }
 }

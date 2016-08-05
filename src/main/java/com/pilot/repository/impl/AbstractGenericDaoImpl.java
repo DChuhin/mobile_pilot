@@ -1,21 +1,29 @@
 package com.pilot.repository.impl;
 
 import com.pilot.repository.GenericDao;
-import org.apache.log4j.Logger;
-import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class AbstractGenericDaoImpl<T, I extends Serializable> implements GenericDao<T, I> {
+abstract class AbstractGenericDaoImpl<T, I extends Serializable> implements GenericDao<T, I> {
+
+    private final HibernateBaseDao baseDao;
 
     @Autowired
-    private HibernateBaseDao baseDao;
+    public AbstractGenericDaoImpl(HibernateBaseDao baseDao) {
+        this.baseDao = baseDao;
+    }
 
-    protected HibernateBaseDao getBaseDao() {
+    private HibernateBaseDao getBaseDao() {
         return baseDao;
+    }
+
+    @Override
+    public Criteria createCriteria() {
+        return baseDao.createCriteria(getPersistentClass());
     }
 
     @Override
@@ -45,16 +53,11 @@ public abstract class AbstractGenericDaoImpl<T, I extends Serializable> implemen
 
     @Override
     public List<T> getAll() {
-        return getBaseDao().find(getPersistentClass(), null);
+        return getBaseDao().find(createCriteria());
     }
 
     @Override
-    public void flush() {
-        getBaseDao().getHibernateTemplate().flush();
-    }
-
-    @Override
-    public List<T> find(DetachedCriteria criteria) {
-        return getBaseDao().find(getPersistentClass(), criteria);
+    public List<T> find(Criteria criteria) {
+        return getBaseDao().find(criteria);
     }
 }

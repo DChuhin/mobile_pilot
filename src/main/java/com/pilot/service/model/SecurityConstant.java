@@ -6,8 +6,7 @@ package com.pilot.service.model;
 public class SecurityConstant {
 
     public static final String HEADER_SECURITY_TOKEN = "X-Pilot-Token";
-    public static final long TOKEN_EXPIRATION_TIME_MILLIS = 1000 * 3600 * 24;
-    public static final String KEY = "key123";
+    public static final String API_URL = "/api/**";
 
     private SecurityConstant() {
     }

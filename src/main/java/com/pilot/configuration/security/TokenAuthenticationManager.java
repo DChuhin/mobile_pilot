@@ -1,10 +1,10 @@
 package com.pilot.configuration.security;
 
-import com.pilot.service.model.SecurityConstant;
 import com.pilot.service.model.TokenAuthentication;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -19,9 +19,12 @@ import java.util.Date;
  * Token Authentication Manager
  */
 @Component
-public class TokenAuthenticationManager implements AuthenticationManager {
+class TokenAuthenticationManager implements AuthenticationManager {
 
     private final UserDetailsService userDetailsService;
+
+    @Value("security.key")
+    private String key;
 
     @Autowired
     public TokenAuthenticationManager(UserDetailsService userDetailsService) {
@@ -41,7 +44,7 @@ public class TokenAuthenticationManager implements AuthenticationManager {
         String token = authentication.getToken();
         DefaultClaims claims;
         try {
-            claims = (DefaultClaims) Jwts.parser().setSigningKey(SecurityConstant.KEY).parse(token).getBody();
+            claims = (DefaultClaims) Jwts.parser().setSigningKey(key).parse(token).getBody();
         } catch (Exception ex) {
             throw new AuthenticationServiceException("Token corrupted");
         }

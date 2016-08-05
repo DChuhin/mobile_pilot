@@ -24,8 +24,12 @@ import java.util.List;
 @RestController
 public class AdvertiseLogController {
 
+    private final AdvertiseLogService advertiseLogService;
+
     @Autowired
-    private AdvertiseLogService advertiseLogService;
+    public AdvertiseLogController(AdvertiseLogService advertiseLogService) {
+        this.advertiseLogService = advertiseLogService;
+    }
 
     /**
      * Log advertise

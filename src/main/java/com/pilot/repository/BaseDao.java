@@ -1,7 +1,6 @@
 package com.pilot.repository;
 
-import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.Criteria;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,13 +10,6 @@ import java.util.List;
  * BaseDao interface
  */
 public interface BaseDao {
-
-    /**
-     * Get current session
-     *
-     * @return Session
-     */
-    Session getCurrentSession();
 
     /**
      * Save entity
@@ -58,6 +50,14 @@ public interface BaseDao {
      * @param <T>      class of entity
      * @return List<T>
      */
-    <T> List<T> find(Class<T> tClass, DetachedCriteria criteria);
+    <T> List<T> find(Criteria criteria);
 
+    /**
+     * Create criteria for class
+     *
+     * @param persistentClass class
+     * @param <T>             class
+     * @return Criteria
+     */
+    <T> Criteria createCriteria(Class<T> persistentClass);
 }

@@ -22,13 +22,11 @@ import java.text.MessageFormat;
  */
 class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-    private static final String FILTER_URL = "/api/**";
-
     /**
      * Default constructor
      */
     TokenAuthenticationFilter() {
-        super(FILTER_URL);
+        super(SecurityConstant.API_URL);
         setAuthenticationSuccessHandler((request, response, authentication) ->
                 SecurityContextHolder.getContext().setAuthentication(authentication));
         setAuthenticationFailureHandler((request, response, authenticationException) ->

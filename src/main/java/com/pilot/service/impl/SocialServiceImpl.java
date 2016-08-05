@@ -20,8 +20,7 @@ import javax.annotation.PostConstruct;
 @Service
 public class SocialServiceImpl implements SocialService {
 
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
 
     private Twitter twitter;
 
@@ -29,9 +28,14 @@ public class SocialServiceImpl implements SocialService {
 
     private String facebookAccessToken;
 
-    private final String FACEBOOK_PAGE_ID = "226076264455348";
+    private String pageId;
 
-    private final String MESSAGE_TEMPLATE = "Advertise logged: logId: %d, advertise: %d, channel: %d, device: %d";
+    private static final String MESSAGE_TEMPLATE = "Advertise logged: logId: %d, advertise: %d, channel: %d, device: %d";
+
+    @Autowired
+    public SocialServiceImpl(Environment environment) {
+        this.environment = environment;
+    }
 
     @PostConstruct
     public void init() {
@@ -43,6 +47,7 @@ public class SocialServiceImpl implements SocialService {
         String facebookAppId = environment.getProperty("spring.social.facebook.appId");
         facebookAccessToken = environment.getProperty("spring.social.facebook.pageToken");
         facebook = new FacebookTemplate(null, null, facebookAppId);
+        pageId = environment.getProperty("spring.social.facebook.pageId");
     }
 
     @Override
@@ -50,10 +55,10 @@ public class SocialServiceImpl implements SocialService {
         String message = String.format(MESSAGE_TEMPLATE, advertiseLogDTO.getLogId(), advertiseLogDTO.getAdvertiseId(), advertiseLogDTO.getChannelId(), advertiseLogDTO.getDeviceId());
         new Thread(() -> twitter.timelineOperations().updateStatus(message)).start();
         new Thread(() -> {
-            PagePostData pagePostData = new PagePostData(FACEBOOK_PAGE_ID).message(message);
+            PagePostData pagePostData = new PagePostData(pageId).message(message);
             MultiValueMap<String, Object> map = pagePostData.toRequestParameters();
             map.add("access_token", facebookAccessToken);
-            facebook.publish(FACEBOOK_PAGE_ID, "feed", map);
+            facebook.publish(pageId, "feed", map);
         }).start();
 
     }
