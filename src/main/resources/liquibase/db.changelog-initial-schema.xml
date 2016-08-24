@@ -21,6 +21,9 @@
             <column name="F_DATE" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+            <column name="F_SEGMENT" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

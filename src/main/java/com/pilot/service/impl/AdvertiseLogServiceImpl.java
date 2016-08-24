@@ -1,5 +1,6 @@
 package com.pilot.service.impl;
 
+import com.google.common.collect.Lists;
 import com.pilot.controller.model.request.AdvertiseRequest;
 import com.pilot.repository.AdvertiseLogDao;
 import com.pilot.repository.model.entity.AdvertiseLog;
@@ -44,6 +45,8 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
         advertiseLog.setAdvertiseId(advertiseLogDTO.getAdvertiseId());
         advertiseLog.setChannelId(advertiseLogDTO.getChannelId());
         advertiseLog.setDate(new Date().getTime());
+        advertiseLog.setSegment(advertiseLogDTO.getSegment());
+        advertiseLog.setDeviceId(advertiseLogDTO.getDeviceId());
         advertiseLogDao.save(advertiseLog);
         socialService.postAdvertiseLog(AdvertiseLogDTO.newBuilder().build(advertiseLog));
         return AdvertiseLogDTO.newBuilder().build(advertiseLog);
@@ -81,7 +84,7 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
 
     @Override
     public List<AdvertiseLogDTO> getLogs(AdvertiseRequest advertiseRequest) {
-        List<AdvertiseLog> advertises = advertiseLogDao.getChartListByRequest(advertiseRequest);
+        List<AdvertiseLog> advertises = Lists.reverse(advertiseLogDao.getChartListByRequest(advertiseRequest));
         return advertises.stream()
                 .map(advertiseLog -> AdvertiseLogDTO.newBuilder().build(advertiseLog))
                 .collect(Collectors.toList());

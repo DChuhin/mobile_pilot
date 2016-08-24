@@ -30,7 +30,7 @@ public class SocialServiceImpl implements SocialService {
 
     private String pageId;
 
-    private static final String MESSAGE_TEMPLATE = "Advertise logged: logId: %d, advertise: %d, channel: %d, device: %d";
+    private static final String MESSAGE_TEMPLATE = "Advertise logged: logId: %d, advertise: %d, channel: %d, device: %d, segment: %d";
 
     @Autowired
     public SocialServiceImpl(Environment environment) {
@@ -52,7 +52,7 @@ public class SocialServiceImpl implements SocialService {
 
     @Override
     public void postAdvertiseLog(AdvertiseLogDTO advertiseLogDTO) {
-        String message = String.format(MESSAGE_TEMPLATE, advertiseLogDTO.getLogId(), advertiseLogDTO.getAdvertiseId(), advertiseLogDTO.getChannelId(), advertiseLogDTO.getDeviceId());
+        String message = String.format(MESSAGE_TEMPLATE, advertiseLogDTO.getLogId(), advertiseLogDTO.getAdvertiseId(), advertiseLogDTO.getChannelId(), advertiseLogDTO.getDeviceId(), advertiseLogDTO.getSegment());
         new Thread(() -> twitter.timelineOperations().updateStatus(message)).start();
         new Thread(() -> {
             PagePostData pagePostData = new PagePostData(pageId).message(message);

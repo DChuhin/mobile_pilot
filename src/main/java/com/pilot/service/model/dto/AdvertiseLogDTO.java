@@ -18,12 +18,15 @@ public class AdvertiseLogDTO {
 
     private Long deviceId;
 
+    private Long segment;
+
     private AdvertiseLogDTO(Builder builder) {
         logId = builder.logId;
         advertiseId = builder.advertiseId;
         channelId = builder.channelId;
         date = builder.date;
         deviceId = builder.deviceId;
+        segment = builder.segment;
     }
 
     /**
@@ -59,6 +62,10 @@ public class AdvertiseLogDTO {
         return deviceId;
     }
 
+    public Long getSegment() {
+        return segment;
+    }
+
 
     public static final class Builder {
         private Long logId;
@@ -66,6 +73,7 @@ public class AdvertiseLogDTO {
         private Long channelId;
         private Long date;
         private Long deviceId;
+        private Long segment;
 
         private Builder() {
         }
@@ -95,6 +103,11 @@ public class AdvertiseLogDTO {
             return this;
         }
 
+        public Builder withSegment(Long val) {
+            segment = val;
+            return this;
+        }
+
         public AdvertiseLogDTO build() {
             return new AdvertiseLogDTO(this);
         }
@@ -105,6 +118,7 @@ public class AdvertiseLogDTO {
             logId = advertiseLog.getId();
             date = advertiseLog.getDate();
             deviceId = advertiseLog.getDeviceId();
+            segment = advertiseLog.getSegment();
             return new AdvertiseLogDTO(this);
         }
     }

@@ -35,6 +35,9 @@ public class AdvertiseLog implements Serializable {
     @Column(name = "F_DEVICE_ID")
     private long deviceId;
 
+    @Column(name = "F_SEGMENT")
+    private long segment;
+
     public long getId() {
         return id;
     }
@@ -75,6 +78,14 @@ public class AdvertiseLog implements Serializable {
         this.channelId = channelId;
     }
 
+    public long getSegment() {
+        return segment;
+    }
+
+    public void setSegment(long segment) {
+        this.segment = segment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,11 +95,12 @@ public class AdvertiseLog implements Serializable {
                 advertiseId == that.advertiseId &&
                 channelId == that.channelId &&
                 date == that.date &&
-                deviceId == that.deviceId;
+                deviceId == that.deviceId &&
+                segment == that.segment;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, advertiseId, channelId, date, deviceId);
+        return Objects.hash(id, advertiseId, channelId, date, deviceId, segment);
     }
 }
