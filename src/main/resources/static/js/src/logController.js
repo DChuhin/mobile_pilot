@@ -2,7 +2,7 @@ var app = angular.module('app');
 app.filter('cmdate', [
     '$filter', function ($filter) {
         return function (input) {
-            return $filter('date')(new Date(input).toLocaleDateString());
+            return $filter('date')(new Date(input).toLocaleString());
         };
     }
 ]);
