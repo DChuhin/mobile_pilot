@@ -54,12 +54,14 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
 
     @Override
     public ChartResponse getChartData(AdvertiseRequest advertiseRequest) {
+        final long segmentLength = 8;
         List<AdvertiseLog> advertises = advertiseLogDao.getChartListByRequest(advertiseRequest);
-        if (advertises.isEmpty()) {
+        List<AdvertiseLog> firstSegmentAds = advertises.stream().filter(advertiseLog -> advertiseLog.getSegment() == segmentLength).collect(Collectors.toList());
+        if (firstSegmentAds.isEmpty()) {
             return new ChartResponse();
         } else {
             ChartContext chartContext = new ChartContext(advertiseRequest);
-            chartContext.setAdvertiseLogList(advertises);
+            chartContext.setAdvertiseLogList(firstSegmentAds);
             processDates(chartContext);
             return advertiseConsolidationService.consolidateChartData(chartContext);
         }

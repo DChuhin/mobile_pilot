@@ -1,6 +1,7 @@
 package com.pilot.service.model.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pilot.repository.model.entity.AdvertiseLog;
 
 /**
@@ -10,6 +11,7 @@ public class AdvertiseLogDTO {
 
     private Long logId;
 
+    @JsonProperty("contentId")
     private Long advertiseId;
 
     private Long channelId;
@@ -18,6 +20,7 @@ public class AdvertiseLogDTO {
 
     private Long deviceId;
 
+    @JsonProperty(value = "timestamp")
     private Long segment;
 
     private AdvertiseLogDTO(Builder builder) {

@@ -30,7 +30,7 @@ public class SocialServiceImpl implements SocialService {
 
     private String pageId;
 
-    private static final String MESSAGE_TEMPLATE = "Advertise logged: logId: %d, advertise: %d, channel: %d, device: %d, segment: %d";
+    private static final String MESSAGE_TEMPLATE = "Advertise logged: logId: %d, content: %d, channel: %d, device: %d, timestamp: %d";
 
     @Autowired
     public SocialServiceImpl(Environment environment) {
