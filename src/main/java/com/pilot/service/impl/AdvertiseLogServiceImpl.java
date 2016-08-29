@@ -9,13 +9,17 @@ import com.pilot.service.AdvertiseLogService;
 import com.pilot.service.SocialService;
 import com.pilot.service.model.ChartContext;
 import com.pilot.service.model.ChartResponse;
+import com.pilot.service.model.DistinctAdvertiseKey;
 import com.pilot.service.model.dto.AdvertiseLogDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,9 +58,8 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
 
     @Override
     public ChartResponse getChartData(AdvertiseRequest advertiseRequest) {
-        final long segmentLength = 8;
         List<AdvertiseLog> advertises = advertiseLogDao.getChartListByRequest(advertiseRequest);
-        List<AdvertiseLog> firstSegmentAds = advertises.stream().filter(advertiseLog -> advertiseLog.getSegment() == segmentLength).collect(Collectors.toList());
+        List<AdvertiseLog> firstSegmentAds = filterFirstSegments(advertises);
         if (firstSegmentAds.isEmpty()) {
             return new ChartResponse();
         } else {
@@ -65,6 +68,25 @@ public class AdvertiseLogServiceImpl implements AdvertiseLogService {
             processDates(chartContext);
             return advertiseConsolidationService.consolidateChartData(chartContext);
         }
+    }
+
+    private List<AdvertiseLog> filterFirstSegments(List<AdvertiseLog> advertises) {
+        List<AdvertiseLog> firstSegmentAds = new ArrayList<>();
+        Map<DistinctAdvertiseKey, Long> distinctLogs = new HashMap<>();
+        for (AdvertiseLog advertiseLog : advertises) {
+            DistinctAdvertiseKey distinctAdvertiseKey = DistinctAdvertiseKey.newBuilder().build(advertiseLog);
+            Long previous = distinctLogs.get(distinctAdvertiseKey);
+            if (previous == null) {
+                distinctLogs.put(distinctAdvertiseKey, advertiseLog.getDate());
+                firstSegmentAds.add(advertiseLog);
+            } else {
+                distinctLogs.replace(distinctAdvertiseKey, advertiseLog.getDate());
+                if (advertiseLog.getDate() - previous > advertiseLog.getSegment() * 1000) {
+                    firstSegmentAds.add(advertiseLog);
+                }
+            }
+        }
+        return firstSegmentAds;
     }
 
     private void processDates(ChartContext chartContext) {
